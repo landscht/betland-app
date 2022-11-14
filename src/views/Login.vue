@@ -4,10 +4,10 @@
       <h1 class="shine">BetLand</h1>
     </div>
     <div class="container-login">
-      <p class="mt-3">Bienvenue sur BetLand! Venez parier sur la Coupe Du Monde 2022 entre amis !</p>
+      <p class="mb-3">Bienvenue sur BetLand! Venez parier sur la Coupe Du Monde 2022 entre amis !</p>
       <vs-input
           v-if="signupMode"
-          class="mt-3"
+          class="mb-3"
           label-placeholder="Email"
           v-model="email"
       />
@@ -32,12 +32,12 @@
       <vs-input
           v-if="signupMode"
           class="mb-3"
-          visible-password
+          :visiblePassword="hasVisiblePassword"
           label-placeholder="Confirmation mot de passe"
           type="password"
           v-model="confirmPassword"
       />
-      <vs-button class="mt-3" @click="signupMode ? signup() : callSignin()">{{ signupMode ? `S'inscrire` : 'Se connecter' }}</vs-button>
+      <vs-button class="mt-3" :active-disabled="disabled" @click="signupMode ? signup() : callSignin()">{{ signupMode ? `S'inscrire` : 'Se connecter' }}</vs-button>
       <vs-button class="mt-3" transparent @click="signupMode = !signupMode">{{ signupMode ? `J'ai déja un compte` : 'Se créer un compte' }}</vs-button>
     </div>
     <div class="area">
@@ -101,6 +101,10 @@ export default class Login extends Vue {
     this.username = '';
     this.password = '';
     this.confirmPassword = '';
+  }
+
+  get disabled(): boolean {
+    return (this.signupMode && (this.password !== this.confirmPassword || this.email.length < 3)) || this.password.length < 6 || this.username.length < 3;
   }
 
   async callSignin(): Promise<void> {

@@ -1,6 +1,6 @@
 import axios, {AxiosInstance} from "axios";
-import {AuthorizationService} from "@/_services/authorization.service";
 import store from "@/_store";
+
 
 const axiosInstance: AxiosInstance = axios.create();
 

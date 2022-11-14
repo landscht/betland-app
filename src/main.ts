@@ -7,7 +7,8 @@ import vuesax from 'vuesax'
 import 'boxicons/css/boxicons.min.css'
 
 import 'vuesax/dist/vuesax.css'
-import filters from "@/_plugins/filters"; //Vuesax styles
+import filters from "@/_plugins/filters";
+
 Vue.use(vuesax, {
   // options here
 })

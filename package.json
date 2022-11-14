@@ -5,12 +5,13 @@
   "scripts": {
     "serve": "vue-cli-service serve",
     "build": "vue-cli-service build",
-    "start": "electron src/background.ts",
     "lint": "vue-cli-service lint",
     "electron:build": "vue-cli-service electron:build",
     "electron:serve": "vue-cli-service electron:serve",
-    "postinstall": "electron-builder install-app-deps",
-    "postuninstall": "electron-builder install-app-deps"
+    "postuninstall": "electron-builder install-app-deps",
+    "postinstall": "npm run build",
+    "start": "node server.js"
+
   },
   "main": "background.js",
   "dependencies": {
@@ -18,6 +19,8 @@
     "boxicons": "^2.1.2",
     "core-js": "^3.8.3",
     "dayjs": "^1.11.6",
+    "express": "^4.18.2",
+    "serve-static": "^1.15.0",
     "ts-loader": "~8.2.0",
     "vue": "^2.6.14",
     "vue-class-component": "^7.2.3",
