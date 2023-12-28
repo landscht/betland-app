@@ -1,6 +1,8 @@
 <template>
   <div>
-    <h1 style="text-align: center">{{ competition.name }}</h1>
+    <div style="display: flex; flex-direction: column; align-items: center">
+      <img :src="competition.image" width="200"/>
+    </div>
     <button-tab :buttons="buttons" />
     <router-view />
   </div>
@@ -36,8 +38,8 @@ export default class CompetitionView extends Vue {
       to: `/home/competition/${this.competition.id}/matchs`
     });
     this.buttons.push({
-      label: 'Equipes',
-      to: `/home/competition/${this.competition.id}/teams`
+      label: 'Classement',
+      to: `/home/competition/${this.competition.id}/standings`
     });
   }
 

@@ -6,7 +6,6 @@ import bet from "@/_store/bet";
 export default class BetService {
 
     static async createBetForMatch(idMatch: string, bet: Bet): Promise<Bet> {
-        console.log(bet);
         const url = `${Api.URL}api/bet/match/${idMatch}`;
         const response = await axiosInstance.post<Bet>(url, bet);
         return response.data;

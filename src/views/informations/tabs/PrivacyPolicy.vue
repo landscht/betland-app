@@ -5,11 +5,11 @@
       <b>Betland</b> n'utilise aucune de vos données. Elles ne sont ni stockées ni collectées.
     </p>
     <p>
-      Seul votre adresse email entré lors de votre inscription est stocké à des fins d'authentification et de vérification, mais elle n'a aucun usage commercial.
+      Seul votre adresse email entrée lors de votre inscription est stockée à des fins d'authentification et de vérification, mais elle n'a aucun usage commercial.
     </p>
     <p>
       Votre vie privée est une chose importante pour nous. C'est pourquoi notre site web et nos applications ne collectent pas d'informations personnelles identifiables ni de
-      données de localisation. Nous n'utilisons pas de SDK externes et nous ne réalisons aucune communication avec un service tier. <b>Betland</b> peut être utilisé sans partager
+      données de localisation. Nous n'utilisons pas de SDK externes et nous ne réalisons aucune communication avec un service tiers. <b>Betland</b> peut être utilisé sans partager
       aucune information personnelle identifiable.
     </p>
     <p>
@@ -31,8 +31,9 @@
 </template>
 
 <script lang="ts">
-import {Vue} from "vue-property-decorator";
+import {Component, Vue} from "vue-property-decorator";
 
+@Component
 export default class PrivacyPolicy extends Vue{
 }
 </script>

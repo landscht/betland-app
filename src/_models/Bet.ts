@@ -7,12 +7,20 @@ export default class Bet {
     updateDate = '';
     homeScore = '';
     awayScore = '';
+    status: BetStatus = BetStatus.PENDING;
     reactWow: User[] = [];
     reactFunny: User[] = [];
     reactGood: User[] = [];
     likedWow = false;
     likedGood = false;
     likedFunny = false;
+}
+
+export enum BetStatus {
+    PENDING = 'PENDING',
+    SUPER_WON = 'SUPER_WON',
+    'WON' = 'WON',
+    'LOST' = 'LOST',
 }
 
 export enum ReactType {

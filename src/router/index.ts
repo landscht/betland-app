@@ -17,9 +17,9 @@ import MatchCompetitionView from "@/views/competition/tabs/MatchCompetitionView.
 import TeamCompetitionView from "@/views/competition/tabs/TeamCompetitionView.vue";
 import InfoView from "@/views/informations/InfoView.vue";
 import Credits from "@/views/informations/tabs/Credits.vue";
-import Rules from "@/views/informations/tabs/Rules.vue";
 import PrivacyPolicy from "@/views/informations/tabs/PrivacyPolicy.vue";
 import RulesView from "@/views/informations/tabs/RulesView.vue";
+import StandingCompetitionView from "@/views/competition/tabs/StandingCompetitionView.vue";
 
 Vue.use(VueRouter)
 
@@ -57,6 +57,10 @@ const routes: Array<RouteConfig> = [
             path: 'teams',
             name: RouteName.COMPETITION_TEAM,
             component: TeamCompetitionView
+          },
+          {
+            path: 'standings',
+            component: StandingCompetitionView
           }
         ]
       },

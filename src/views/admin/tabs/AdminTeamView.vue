@@ -49,20 +49,20 @@ export default class AdminTeamView extends Vue {
   public teamsLocal: Team[] = [];
   public columns: string[] = ['id', 'name', 'flag'];
 
-  @teamModule.Action
-  public retrieveTeams!: () => void;
+  @teamModule.Action('retrieveAll')
+  public retrieveTeams!: (route: string) => void;
 
   @teamModule.Action
-  public createTeam!: (team: Team) => Team;
+  public create!: (params: { element: Team, route: string }) => Team;
 
-  @teamModule.Getter
+  @teamModule.Getter('getElements')
   public getTeams!: Team[];
 
   @teamModule.Action
-  public deleteTeam!: (idCompetition: string) => void;
+  public deleteById!: (params: { id: string, route: string }) => void;
 
   mounted(): void {
-    this.retrieveTeams();
+    this.retrieveTeams('team');
   }
 
   @Watch('getTeams')
@@ -71,12 +71,12 @@ export default class AdminTeamView extends Vue {
   }
 
   public onCreateTeam() {
-    this.createTeam(this.teamRequest);
+    this.create({element: this.teamRequest, route: 'team'});
     this.dialogCreate = false;
   }
 
   public onDeleteTeam(element: Team) {
-    this.deleteTeam(element.id);
+    this.deleteById({id: element.id, route: 'team'});
   }
 
 }

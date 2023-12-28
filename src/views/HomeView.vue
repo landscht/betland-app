@@ -1,11 +1,7 @@
 <template>
   <div>
-    <div style="display: flex; justify-content: flex-end">
-      <vs-avatar>
-      </vs-avatar>
-    </div>
-    <Sidebar></Sidebar>
-    <div class="content">
+    <Sidebar :active-sidebar="activeSidebar"></Sidebar>
+    <div :class="{'content': !isMobile, 'content-mobile': isMobile}">
       <router-view></router-view>
     </div>
   </div>
@@ -15,6 +11,7 @@
 import { Component, Vue } from 'vue-property-decorator';
 import HelloWorld from '@/components/HelloWorld.vue';
 import Sidebar from "@/components/Sidebar.vue";
+import MobileMixin from "@/_mixins/MobileMixin";
 
 @Component({
   components: {
@@ -22,10 +19,9 @@ import Sidebar from "@/components/Sidebar.vue";
     HelloWorld,
   },
 })
-export default class HomeView extends Vue {
+export default class HomeView extends MobileMixin {
 
-
-
+  public activeSidebar = true;
 
 }
 </script>
@@ -33,7 +29,12 @@ export default class HomeView extends Vue {
 <style>
 
 .content {
+  margin-top: 50px;
   margin-left: 280px;
+}
+
+.content-mobile {
+  padding-left: 50px;
 }
 
 </style>

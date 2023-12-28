@@ -1,12 +1,13 @@
 <template>
   <vs-sidebar
-      open
       v-model="active"
+      :reduce="isMobile"
+      :open.sync="activeSidebar"
   >
-    <template #logo>
-      <h1>BetLand</h1>
-    </template>
-    <h3 class="ml-3">{{ `Bonjour ${getCurrentUser.username }`}}</h3>
+    <div style="display: flex; justify-content: center; width: 100%; margin-top: 20px">
+      <img :width="isMobile ? 50 : 150" src="@/assets/logo.png" />
+    </div>
+    <h3 v-if="!isMobile" class="ml-3">{{ `Bonjour ${getCurrentUser.username }`}}</h3>
     <vs-sidebar-item id="house" to="/home/">
       <template #icon>
         <i class='bx bx-home'></i>
@@ -23,12 +24,21 @@
         </vs-sidebar-item>
       </template>
       <vs-sidebar-item id="infoPrivacyPolicy" to="/home/info/privacyPolicy">
+        <template #icon>
+          <i class='bx bx-lock'></i>
+        </template>
         Politique de confidentialité
       </vs-sidebar-item>
       <vs-sidebar-item id="infoHelp" to="/home/info/rules">
+        <template #icon>
+          <i class='bx bx-help-circle'></i>
+        </template>
         Comment jouer ?
       </vs-sidebar-item>
       <vs-sidebar-item id="infoCredits" to="/home/info/credits">
+        <template #icon>
+          <i class='bx bx-medal'></i>
+        </template>
         Credits
       </vs-sidebar-item>
     </vs-sidebar-group>
@@ -73,17 +83,18 @@
 </template>
 
 <script lang="ts">
-import {Component, Vue} from "vue-property-decorator";
+import {Component, Emit, Prop, Vue} from "vue-property-decorator";
 import {AuthorizationService} from "@/_services/authorization.service";
 import {PagePlaylists} from "@/_models/_playlist/PagePlaylists";
 import {PlaylistService} from "@/_services/playlist.service";
 import {namespace} from "vuex-class";
 import JwtResponse from "@/_models/_response/JwtResponse";
+import MobileMixin from "@/_mixins/MobileMixin";
 
 const authModule = namespace('AuthModule');
 
 @Component
-export default class Sidebar extends Vue {
+export default class Sidebar extends MobileMixin {
 
   public active = 'house';
 
@@ -96,6 +107,7 @@ export default class Sidebar extends Vue {
   @authModule.Action
   public logout!: () => void;
 
+  @Prop({ type: Boolean, default: true}) activeSidebar!: boolean;
 
 }
 </script>

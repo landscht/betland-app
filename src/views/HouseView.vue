@@ -1,16 +1,20 @@
 <template>
   <div>
-    <h1>Pariez sur les compétitions suivantes</h1>
-    <vs-card class="mb-3" v-for="(competition, i) in getCompetitions" :key="i" @click="redirectCompetition(competition.id)">
+    <vs-alert shadow closable v-model="alertModel" >
       <template #title>
-        <h3>{{ competition.name }}</h3>
+        News !
       </template>
-      <template #text>
-        <p>
-          {{ competition.description }}
-        </p>
+      Les matchs à éliminations directes sont ouverts ! Les paris que vous allez placés seront le score à la 90ème minutes, le score après les prolongations
+      et le score après les tirs au buts ne sera pas pris en compte
+    </vs-alert>
+    <h1 v-if="!isMobile">Pariez sur les compétitions suivantes</h1>
+    <h2 v-else>Pariez sur les compétitions suivantes</h2>
+    <vs-button @click="redirectCompetition(competition.id)" :active-disabled="!!competition.description" style="width: 300px; height: 100px" gradient v-for="(competition, i) in getCompetitions" :key="i">
+      <h2>{{ competition.name }}</h2>
+      <template #animate>
+        <i style="font-size: 30px" class='bx bx-football'></i>
       </template>
-    </vs-card>
+    </vs-button>
   </div>
 </template>
 
@@ -19,11 +23,14 @@
 import {Component, Vue} from "vue-property-decorator";
 import Competition from "@/_models/Competition";
 import {namespace} from "vuex-class";
+import MobileMixin from "@/_mixins/MobileMixin";
 
 const competitionModule = namespace('CompetitionModule');
 
 @Component
-export default class HouseView extends Vue {
+export default class HouseView extends MobileMixin {
+
+  public alertModel = true;
 
   @competitionModule.Action('retrieveAll')
   public retrieveAll!: (route: string) => void;

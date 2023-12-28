@@ -24,7 +24,6 @@ export default class Datepicker extends Vue{
     if (this.dateModel) {
       this.date = Dayjs(this.dateModel).format('YYYY-MM-DD');
       this.time = Dayjs(this.dateModel).format('HH:mm');
-      console.log(Dayjs(this.dateModel).format('HH:mm'));
     } else {
       this.dateModel = dayjs(`${this.date} ${this.time}`).format('YYYY-MM-DDTHH:mm:ss.SSSSSSZ');
     }

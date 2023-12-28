@@ -1,9 +1,29 @@
 <template>
   <div>
-    <div style="margin-top: 100px; text-align: center">
-      <h1 class="shine">BetLand</h1>
+    <div>
+      <ins class="adsbygoogle"
+           style="display:block"
+           data-ad-client="ca-pub-6045255995207137"
+           data-ad-slot="6954451890"
+           data-ad-format="auto"
+           data-full-width-responsive="true"></ins>
+    </div>
+    <div style=" text-align: center; margin-top: 100px">
+      <img width="200" src="@/assets/logo.png" />
     </div>
     <div class="container-login">
+      <vs-alert relief closable color="#7d33ff" gradient v-if="false" v-model="alertActive">
+        <template #title>
+          Important
+        </template>
+        <div style="display: flex; justify-content: center">
+          <vs-button dark blank href="https://cloud-549580996.onetsolutions.network">Faire confiance à Betland</vs-button>
+        </div>
+        <span style="font-size: 13px">
+          Étant donné que Betland est gratuit et fut développé dans le cadre d'un projet personnel, celui ci utilise un certificat SSL non vérifié par un organisme car cela est payant. 🐀
+        Il se peut donc que lors de la première utilisation, votre navigateur ne fasse pas confiance à l'application 😢 Vous recevrez alors une erreur de la part de l'API qui est utilisée. Pour être sûr, veuillez cliquer sur le lien ci-dessus et autoriser le navigateur à faire confiance à Betland
+        </span>
+      </vs-alert>
       <p class="mb-3">Bienvenue sur BetLand! Venez parier sur la Coupe Du Monde 2022 entre amis !</p>
       <vs-input
           v-if="signupMode"
@@ -68,16 +88,20 @@ const authModule = namespace('AuthModule');
 
 @Component
 export default class Login extends Vue {
-
   username = '';
   password = '';
   email = '';
   confirmPassword = '';
+  alertActive = true;
   signupMode = false;
   hasVisiblePassword = false;
 
   @authModule.Action
   public signin!: (signinRequest: SigninRequest) => boolean;
+
+  mounted(): void {
+    this.adsenseAddLoad();
+  }
 
   async signup(): Promise<void> {
     const request: SignupRequest = {
@@ -123,6 +147,13 @@ export default class Login extends Vue {
         text: `Les identifiants sont incorrects`
       });
     }
+  }
+
+  adsenseAddLoad(){
+    let inlineScript   = document.createElement("script");
+    inlineScript.type  = "text/javascript";
+    inlineScript.text  = '(adsbygoogle = window.adsbygoogle || []).push({});'
+    document.getElementsByTagName('body')[0].appendChild(inlineScript);
   }
 
 }

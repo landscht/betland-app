@@ -1,24 +1,24 @@
 <template>
   <div>
-    <vs-card v-if="match">
+    <vs-card style="width: 100px" v-if="match" class="">
       <template #title>
         <div style="display: flex; justify-content: space-evenly; align-items: center">
-          <logo-info :url="match.homeTeam.isoCountry | getFlag" :alt="match.homeTeam.name" :info="match.homeTeam.name" />
+          <logo-info :url="match.homeTeam.isoCountry | getFlag" :flag="match.homeTeam.flag" :alt="match.homeTeam.name" :info="match.homeTeam.name" />
           <span class="txt-score">{{ match.finished ? match.homeScore : '-' }}</span>
           <span class="txt-score">{{ match.finished ? match.awayScore : '-' }}</span>
-          <logo-info :url="match.awayTeam.isoCountry | getFlag" :alt="match.awayTeam.name" :info="match.awayTeam.name" />
+          <logo-info :url="match.awayTeam.isoCountry | getFlag" :flag="match.awayTeam.flag" :alt="match.awayTeam.name" :info="match.awayTeam.name" />
         </div>
       </template>
       <template #text>
-        <bet-alert :match="match" />
+        <bet-alert :match="match" v-on="$listeners" />
         <div style="display: flex; justify-content: space-between; width: 100%; margin-top: 20px;">
-          <span>{{ match.bets.length }} paris</span>
+          <span style="font-size: 12px; color: gray">{{ match.matchCategory.name }} • {{ match.date | formatTime }} • {{ match.bets.length }} paris</span>
           <vs-button danger gradient style="margin-bottom: -10px" @click="dialogDetails = true">Voir tous les paris</vs-button>
         </div>
       </template>
     </vs-card>
     <vs-dialog scroll overflow-hidden auto-width width="550px" blur v-model="dialogDetails">
-      <match-details-dialog :match="match" />
+      <match-details-dialog :match="match" v-on="$listeners" />
     </vs-dialog>
   </div>
 </template>
@@ -49,6 +49,10 @@ export default class CardMatchBet extends Vue {
 
 ::v-deep .vs-card__text {
   padding-bottom: 0 !important;
+}
+
+::v-deep .vs-dialog__content {
+  max-height: calc(80vh - 50px) !important;
 }
 
 </style>

@@ -1,6 +1,6 @@
 <template>
 <div style="display: flex; flex-direction: column; align-items: center">
-  <img class="img" :src="url" :alt="alt">
+  <img class="img" :src="flag ? flag : url" :alt="alt">
   <span class="info">{{ info }}</span>
 </div>
 </template>
@@ -15,6 +15,7 @@ export default class LogoInfo extends Vue {
   @Prop({ type: String, default: '' }) url!: string;
   @Prop({ type: String, default: '' }) alt!: string;
   @Prop({ type: String, default: '' }) info!: string;
+  @Prop({ type: String, default: '' }) flag!: string;
 
 }
 </script>
@@ -26,6 +27,7 @@ export default class LogoInfo extends Vue {
   height: 50px;
   border-radius: 50%;
   margin-bottom: 5px;
+  background-size: cover;
 }
 
 .info {

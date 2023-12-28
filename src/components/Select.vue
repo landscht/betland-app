@@ -1,6 +1,6 @@
 <template>
   <vs-select :label-placeholder="placeholder" v-model="selectedIndex" @change="selectElement($event)">
-    <vs-option v-for="(element, i) in elements" :key="i" :label="element[valueLabel]" :value="`${i}`">
+    <vs-option v-for="(element, i) in elements" :key="i" :label="element[valueLabel]" :value="`_${i}_`">
       {{ element[valueLabel] }}
     </vs-option>
   </vs-select>
@@ -20,14 +20,14 @@ export default class Select extends Vue {
   selectedIndex = '';
 
   mounted(): void {
-    console.log(this.model);
     if (this.model) {
-      this.selectedIndex = this.elements.findIndex((e: any) => e.id === this.model.id).toString();
+      this.selectedIndex = `_${this.elements.findIndex((e: any) => e.id === this.model.id).toString()}_`;
     }
   }
 
   selectElement(index: string) {
-    this.model = this.elements[Number(index)];
+    const indexInt = Number(index.slice(1, index.length - 1));
+    this.model = this.elements[indexInt];
   }
 
 }

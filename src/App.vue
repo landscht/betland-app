@@ -26,9 +26,6 @@ export default class App extends Vue {
   -moz-osx-font-smoothing: grayscale;
 }
 
-nav {
-  padding: 30px;
-}
 
 nav a {
   font-weight: bold;

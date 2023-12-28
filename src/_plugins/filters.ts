@@ -10,7 +10,6 @@ export default {
     install(Vue: VueConstructor): void {
         Vue.filter('formatDate', (value: string) => {
             importLocales();
-            console.log(value);
             if (value) {
                 return Dayjs(value).locale('fr').format(" dddd D MMMM YYYY").valueOf();
             }
@@ -19,11 +18,17 @@ export default {
 
         Vue.filter('formatDateTime', (value: string) => {
             importLocales();
-            console.log(value);
             if (value) {
-                return Dayjs(value).locale('fr').format("D MMM hh:mm").valueOf();
+                return Dayjs(value).locale('fr').format("D MMM HH:mm").valueOf();
             }
             return value;
+        });
+
+        Vue.filter('formatTime', (value: string) => {
+           importLocales();
+           if (value) {
+               return Dayjs(value).locale('fr').format("HH:mm").valueOf();
+           }
         });
 
         Vue.filter('getFlag', (value: string) => {
